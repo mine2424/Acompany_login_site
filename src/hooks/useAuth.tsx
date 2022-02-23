@@ -9,7 +9,6 @@ export function useAuth(useCase: UserUseCase) {
     const status = useCase.listenAuthStatus()
 
     const data: AuthState = { status: status }
-    console.log(status.toString())
     setAuth(data)
   }
 

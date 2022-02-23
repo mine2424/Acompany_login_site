@@ -1,6 +1,7 @@
 import { AuthStatus } from '../interface/repository/userRepository'
 import UserRepository from '../interface/repository/userRepository'
 import UserUseCase from '../interface/use_case/UserUseCase'
+import { User } from '../entity/user'
 
 export default class UserUseCaseImpl implements UserUseCase {
   readonly userRepository: UserRepository
@@ -13,13 +14,9 @@ export default class UserUseCaseImpl implements UserUseCase {
     return this.userRepository.listenAuthStatus()
   }
 
-  async createUserWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Promise<AuthStatus> {
+  async createUserWithEmailAndPassword(user: User): Promise<AuthStatus> {
     const result = await this.userRepository.createUserWithEmailAndPassword(
-      email,
-      password
+      user
     )
 
     if (result === AuthStatus.ERROR) {
@@ -33,13 +30,9 @@ export default class UserUseCaseImpl implements UserUseCase {
     return this.userRepository.signOut()
   }
 
-  async signInWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Promise<AuthStatus> {
+  async signInWithEmailAndPassword(user: User): Promise<AuthStatus> {
     const result = await this.userRepository.createUserWithEmailAndPassword(
-      email,
-      password
+      user
     )
 
     if (result === AuthStatus.ERROR) {

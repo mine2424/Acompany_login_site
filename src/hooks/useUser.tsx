@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
+import { User } from 'src/domain/entity/user'
 import { AuthStatus } from 'src/domain/interface/repository/userRepository'
 import UserUseCase from '../domain/interface/use_case/UserUseCase'
 import { UserState, userState } from './state/userState'
@@ -12,20 +13,28 @@ export function useUser(useCase: UserUseCase) {
     const data: UserState = { email: email, password: password }
     setUser(data)
 
-    const result = await useCase.createUserWithEmailAndPassword(email, password)
+    const result = await useCase.createUserWithEmailAndPassword(
+      new User(email, password)
+    )
 
     if (result !== AuthStatus.AUTHENTICATED) {
       alert('登録に失敗しました。\n' + result.toString())
+      router.back()
+      return
     }
 
     await router.push('/myPage')
   }
 
   const login = async (email: string, password: string) => {
-    const result = await useCase.signInWithEmailAndPassword(email, password)
+    const result = await useCase.signInWithEmailAndPassword(
+      new User(email, password)
+    )
 
     if (result !== AuthStatus.AUTHENTICATED) {
       alert('ログインに失敗しました。\n' + result.toString())
+      router.back()
+      return
     }
 
     await router.push('/myPage')

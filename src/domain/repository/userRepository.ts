@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   inMemoryPersistence,
+  onAuthStateChanged,
   setPersistence,
   signInWithEmailAndPassword,
   UserCredential,
@@ -12,22 +13,21 @@ import { auth } from 'src/common/plugins/firebase'
 
 export default class UserRepositoryImp implements UserRepository {
   listenAuthStatus(): AuthStatus {
-    const currentUser = auth.currentUser
-
-    if (currentUser) {
-      return AuthStatus.AUTHENTICATED
-    }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return AuthStatus.AUTHENTICATED
+      } else {
+        return AuthStatus.NONE
+      }
+    });
 
     return AuthStatus.NONE
   }
 
-  async createUserWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Promise<AuthStatus> {
+  async createUserWithEmailAndPassword(user: User): Promise<AuthStatus> {
     try {
-      setPersistence(auth, inMemoryPersistence)
-      await createUserWithEmailAndPassword(auth, email, password)
+      await setPersistence(auth, inMemoryPersistence)
+      await createUserWithEmailAndPassword(auth, user.email, user.password)
 
       return AuthStatus.AUTHENTICATED
     } catch (error: any) {
@@ -35,18 +35,15 @@ export default class UserRepositoryImp implements UserRepository {
     }
   }
 
-  async signInWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Promise<AuthStatus> {
+  async signInWithEmailAndPassword(user: User): Promise<AuthStatus> {
     if (auth.currentUser !== null) {
       return AuthStatus.ERROR
     }
 
     try {
-      setPersistence(auth, inMemoryPersistence)
-
-      await signInWithEmailAndPassword(auth, email, password)
+      await setPersistence(auth, inMemoryPersistence)
+      await signInWithEmailAndPassword(auth, user.email, user.password)
+      
       return AuthStatus.AUTHENTICATED
     } catch (e: any) {
       return e.message
