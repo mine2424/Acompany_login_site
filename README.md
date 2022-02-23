@@ -34,7 +34,7 @@ Since I wanted to learn and understand the complex architecture in React, I used
 
 this app of architecture is below the graph.
 
-```json
+```
 common/
 ├── plugins (collect config files)
 │   └── ~.ts
@@ -56,8 +56,16 @@ domain/
 ├── usecase (realize use case, only describe the process)
 │   ├── index.ts
 │   └── ~UseCase.ts
-pages/
+hooks/
+├── state (state of Recoil)
+│   └── ~State.ts
+└── RecoilKeys.ts
 └── use~.tsx
+pages/
+├── ~
+│   └── index.tsx
+└── _app.tsx
+└── index.tsx
 ```
 
 ## statement
