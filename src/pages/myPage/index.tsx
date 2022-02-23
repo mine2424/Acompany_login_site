@@ -8,8 +8,12 @@ import {
   createIcon,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { userUseCase } from 'src/domain/use_case'
+import { useUser } from 'src/hooks/useUser'
 
-export default function OnBoarding() {
+export default function MyPage() {
+  const { state, logout } = useUser(userUseCase)
+
   return (
     <>
       <Container maxW={'3xl'}>
@@ -30,33 +34,21 @@ export default function OnBoarding() {
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-            このサイトはAcompanyのログインサイトです。
+            あなたのメールアドレスは {state.email} です!
           </Text>
-          <Stack
-            direction={'column'}
-            spacing={3}
-            align={'center'}
-            alignSelf={'center'}
-            position={'relative'}
-          >
-            <Link href="/signUp" passHref>
-              <Button
-                colorScheme={'green'}
-                bg={'green.400'}
-                rounded={'full'}
-                px={6}
-                _hover={{
-                  bg: 'green.500',
-                }}
-              >
-                新規登録
-              </Button>
-            </Link>
-            <Link href="/login" passHref>
-              <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
-                ログイン
-              </Button>
-            </Link>
+          <Stack spacing={10}>
+            <Button
+              bg={'green.400'}
+              color={'white'}
+              _hover={{
+                bg: 'green.600',
+              }}
+              onClick={async () => {
+                await logout()
+              }}
+            >
+              ログアウトする
+            </Button>
           </Stack>
         </Stack>
       </Container>

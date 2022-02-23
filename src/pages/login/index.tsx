@@ -17,7 +17,7 @@ import { useState } from 'react'
 import { userUseCase } from 'src/domain/use_case'
 import { useUser } from 'src/hooks/useUser'
 
-export default function SignUp() {
+export default function Login() {
   const [email, setEmail] = useState('')
   const handleEmailChange = (e: any) => setEmail(e.target.value)
   const isEmailError = email === '' || !email.includes('@')
@@ -26,19 +26,13 @@ export default function SignUp() {
   const handlePasswordChange = (e: any) => setPassword(e.target.value)
   const isPasswordError = password === '' || password.length < 8
 
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const handleConfirmPasswordChange = (e: any) =>
-    setConfirmPassword(e.target.value)
-  const isConfirmPasswordError =
-    confirmPassword === '' || password !== confirmPassword
-
-  const { signUp } = useUser(userUseCase)
+  const { login } = useUser(userUseCase)
 
   return (
     <Flex minH={'100vh'} align={'center'} justify={'center'}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>新規登録しましょう！</Heading>
+          <Heading fontSize={'4xl'}>ログインしましょう！</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
             利用規約は <Link color={'green.400'}>こちら</Link> ✌️
           </Text>
@@ -78,19 +72,6 @@ export default function SignUp() {
                 </FormErrorMessage>
               ) : null}
             </FormControl>
-            <FormControl
-              id="confirmPassword"
-              isInvalid={isConfirmPasswordError}
-            >
-              <FormLabel>確認用パスワード</FormLabel>
-              <Input
-                type="password"
-                color={'green.400'}
-                focusBorderColor={'green.400'}
-                onChange={handleConfirmPasswordChange}
-              />
-              <FormErrorMessage>パスワードが一致しません</FormErrorMessage>
-            </FormControl>
             <Stack spacing={10}>
               <Button
                 bg={'green.400'}
@@ -98,11 +79,11 @@ export default function SignUp() {
                 _hover={{
                   bg: 'green.600',
                 }}
-                onClick={async () => {
-                  await signUp(email, password)
+                onClick={() => {
+                  login(email, password)
                 }}
               >
-                新規登録する
+                ログインする
               </Button>
             </Stack>
           </Stack>
