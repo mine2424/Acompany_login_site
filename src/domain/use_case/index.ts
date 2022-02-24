@@ -1,5 +1,5 @@
 import UserRepositoryImpl from '../repository/userRepository'
-import UserUseCaseImpl from './UserUseCase'
+import UserUseCaseImpl from './userUseCase'
 
 const userRepository = new UserRepositoryImpl()
 

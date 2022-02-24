@@ -1,6 +1,6 @@
 import { AuthStatus } from '../interface/repository/userRepository'
 import UserRepository from '../interface/repository/userRepository'
-import UserUseCase from '../interface/use_case/UserUseCase'
+import UserUseCase from '../interface/use_case/userUseCase'
 import { User } from '../entity/user'
 
 export default class UserUseCaseImpl implements UserUseCase {

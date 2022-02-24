@@ -19,7 +19,7 @@ export default class UserRepositoryImp implements UserRepository {
       } else {
         return AuthStatus.NONE
       }
-    });
+    })
 
     return AuthStatus.NONE
   }
@@ -43,7 +43,7 @@ export default class UserRepositoryImp implements UserRepository {
     try {
       await setPersistence(auth, inMemoryPersistence)
       await signInWithEmailAndPassword(auth, user.email, user.password)
-      
+
       return AuthStatus.AUTHENTICATED
     } catch (e: any) {
       return e.message

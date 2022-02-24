@@ -1,12 +1,13 @@
 import { User } from 'src/domain/entity/user'
-import UserRepository, {
-  AuthStatus,
-} from 'src/domain/interface/repository/userRepository'
-import UserRepositoryImp from '../userRepository'
+import { AuthStatus } from 'src/domain/interface/repository/userRepository'
+import UserRepositoryImp from 'src/domain/repository/userRepository'
+import UserUseCase from '../userUseCase'
 
 describe('UserRepository', () => {
+  const userRepository = new UserRepositoryImp()
+  
   it('should create an instance', () => {
-    expect(new UserRepositoryImp()).toBeTruthy()
+    expect(new UserUseCase(userRepository)).toBeTruthy()
   })
 
   test('create user', async () => {
@@ -14,7 +15,7 @@ describe('UserRepository', () => {
       email: 'test@gmail.com',
       password: 'test123456',
     }
-    const test = new UserRepositoryImp()
+    const test = new UserUseCase(userRepository)
 
     expect(await test.createUserWithEmailAndPassword(user)).toEqual(
       AuthStatus.AUTHENTICATED
@@ -26,7 +27,7 @@ describe('UserRepository', () => {
       email: 'test@gmail.com',
       password: 'test123456',
     }
-    const test = new UserRepositoryImp()
+    const test = new UserUseCase(userRepository)
 
     expect(await test.signInWithEmailAndPassword(user)).toEqual(
       AuthStatus.AUTHENTICATED
@@ -34,7 +35,7 @@ describe('UserRepository', () => {
   })
 
   test('logout user', async () => {
-    const test = new UserRepositoryImp()
+    const test = new UserUseCase(userRepository)
 
     expect(await test.signOut()).toEqual(true)
   })
