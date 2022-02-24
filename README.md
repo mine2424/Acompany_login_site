@@ -49,11 +49,11 @@ domain/
 ├── interface (collect abstract class)
 │   ├── repository
 │   │   └── ~Repository.ts
-│   └── usecase
+│   └── useCase
 │       └── ~UseCase.ts
 ├── repository (can get outside information, such as database, etc...)
 │   └── ~Repository.ts
-├── usecase (realize use case, only describe the process)
+├── useCase (realize use case, only describe the process)
 │   ├── index.ts
 │   └── ~UseCase.ts
 hooks/

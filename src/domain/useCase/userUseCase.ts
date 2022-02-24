@@ -1,5 +1,5 @@
 import UserRepository from '../interface/repository/userRepository'
-import UserUseCase from '../interface/use_case/userUseCase'
+import UserUseCase from '../interface/useCase/userUseCase'
 import { User } from '../entity/user'
 import { AuthStatus } from '../interface/repository/userRepository'
 

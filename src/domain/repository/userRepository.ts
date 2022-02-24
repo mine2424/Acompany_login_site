@@ -41,6 +41,9 @@ export default class UserRepositoryImp implements UserRepository {
 
     try {
       await setPersistence(auth, inMemoryPersistence)
+      // BUG: ログインするためのメソッドとしては合っているが、(emnail-already-in-use)とエラーが返ってくる
+      // このエラーを返されるとどうすることもできないので、一旦保留にしている。
+      // 別の方法として、ユーザーが存在しているかどうかを確認して、そのままログインとして扱うパターンもあるが...
       await signInWithEmailAndPassword(auth, user.email, user.password)
 
       return AuthStatus.AUTHENTICATED

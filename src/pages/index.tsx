@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import OnBoarding from './onBoarding'
 import { useAuth } from '../hooks/useAuth'
-import { userUseCase } from 'src/domain/use_case'
+import { userUseCase } from 'src/domain/useCase'
 import { useEffect } from 'react'
 import { AuthStatus } from 'src/domain/interface/repository/userRepository'
 import MyPage from './myPage'

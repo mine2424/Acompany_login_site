@@ -8,7 +8,7 @@ import {
   createIcon,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import { userUseCase } from 'src/domain/use_case'
+import { userUseCase } from 'src/domain/useCase'
 import { useUser } from 'src/hooks/useUser'
 
 export default function MyPage() {

@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { userUseCase } from 'src/domain/use_case'
+import { userUseCase } from 'src/domain/useCase'
 import { useUser } from 'src/hooks/useUser'
 
 export default function Login() {

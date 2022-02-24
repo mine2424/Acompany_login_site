@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
 import { User } from 'src/domain/entity/user'
 import { AuthStatus } from 'src/domain/interface/repository/userRepository'
-import UserUseCase from '../domain/interface/use_case/userUseCase'
+import UserUseCase from '../domain/interface/useCase/userUseCase'
 import { UserState, userState } from './state/userState'
 
 export function useUser(useCase: UserUseCase) {

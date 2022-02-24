@@ -1,5 +1,5 @@
 import { useRecoilCallback, useRecoilState } from 'recoil'
-import UserUseCase from '../domain/interface/use_case/userUseCase'
+import UserUseCase from '../domain/interface/useCase/userUseCase'
 import { AuthState, authState } from './state/authState'
 
 export function useAuth(useCase: UserUseCase) {
