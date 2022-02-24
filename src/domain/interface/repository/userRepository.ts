@@ -1,4 +1,3 @@
-import { UserCredential } from 'firebase/auth'
 import { User } from 'src/domain/entity/user'
 
 export default interface UserRepository {
