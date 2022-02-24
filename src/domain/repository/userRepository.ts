@@ -4,7 +4,6 @@ import {
   onAuthStateChanged,
   setPersistence,
   signInWithEmailAndPassword,
-  UserCredential,
 } from 'firebase/auth'
 import { User } from '../entity/user'
 import UserRepository from '../interface/repository/userRepository'
